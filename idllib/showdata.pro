@@ -43,7 +43,7 @@ PRO showdata, data, contour=contour, yr=yr, color=color, $
               az=az, delay=delay, _extra=_extra, $
               noscale=noscale, uedge=uedge, period=period, $
               addsym=addsym, bw=bw, bmp=bmp, output=output, $
-              numoff=numoff
+              numoff=numoff,rel_norm = rel_norm
 
   on_error,2  ; If an error occurs, return to caller
 
@@ -97,6 +97,13 @@ PRO showdata, data, contour=contour, yr=yr, color=color, $
       nt = s[2]
 
       val = data
+
+      if KEYWORD_SET(rel_norm) then begin
+         FOR t=0,nt-1 DO BEGIN
+            print,"normalizing to 1"
+            val[*,*,t] = val[*,*,t]/(max(abs(val[*,*,t])))
+         endfor
+      endif
       
       IF KEYWORD_SET(profile) THEN BEGIN
           FOR i=0, nx-1 DO BEGIN
@@ -136,7 +143,7 @@ PRO showdata, data, contour=contour, yr=yr, color=color, $
               IF KEYWORD_SET(bmp) THEN BEGIN
                   IF i EQ 0 THEN BEGIN
                       PRINT, "Click window to begin"
-                      cursor, x, y, /down
+                      ;cursor, x, y,/down
                   ENDIF
                   file = bmp + STRTRIM(STRING(i+numoff, FORMAT='(I04)'),2)+".bmp"
                   PRINT, "Writing file: " +file
@@ -158,6 +165,17 @@ PRO showdata, data, contour=contour, yr=yr, color=color, $
               IF delay LT 0.0 THEN BEGIN
                   cursor, x, y, /down
               ENDIF ELSE WAIT, delay
+
+              IF KEYWORD_SET(bmp) THEN BEGIN
+                 IF i EQ 0 THEN BEGIN
+                    PRINT, "Click window to begin"
+                                ;cursor, x, y,/down
+                 ENDIF
+                 file = bmp + STRTRIM(STRING(i+numoff, FORMAT='(I04)'),2)+".bmp"
+                 PRINT, "Writing file: " +file
+                 
+                 WRITE_BMP, file, TVRD(TRUE=1)
+              ENDIF
           ENDFOR
       ENDELSE
       
@@ -208,6 +226,8 @@ PRO showdata, data, contour=contour, yr=yr, color=color, $
               cursor, x, y, /down
           ENDIF ELSE WAIT, delay
 
+
+          
           IF KEYWORD_SET(bmp) THEN BEGIN
               IF i EQ 0 THEN BEGIN
                   PRINT, "Click window to begin"
