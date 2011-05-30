@@ -37,8 +37,10 @@
 #include "meshtopology.h"
 
 #include <math.h>
+
 #include <string.h>
 #include <stdlib.h>
+#include <ctime>
 
 real Prof1D(real s, real s0, real sMin, real sMax, real sWidth, int nMode, real phase, int opt);
 
@@ -73,6 +75,8 @@ int initial_profile(const char *name, Field3D &var)
   real xs_wd, ys_wd, zs_wd;
   int jx, jy, jz, ly, lx;
   real cx, cy, cz;
+  
+  srand(time(0));
 
   var = 0.0;
 
@@ -416,6 +420,8 @@ real Prof1D(real s, real s0, real sMin, real sMax, real sWidth, int nMode, real 
   real res;
   real sNorm=s/(sMax-sMin);
 
+  
+
   phase *= PI;
 
   switch (opt) 
@@ -450,10 +456,43 @@ real Prof1D(real s, real s0, real sMin, real sMax, real sWidth, int nMode, real 
         + sin(3.*nMode*sNorm*TWOPI + hash_reals(sNorm, phase, 2.*nMode)*TWOPI)
         + sin(4.*nMode*sNorm*TWOPI + hash_reals(sNorm, phase, 3.*nMode)*TWOPI);
       break;
+    
+    case 5:
+      res = sin(nMode*sNorm*TWOPI)
+        + sin(2.*nMode*sNorm*TWOPI + hash_reals(sNorm, phase, nMode)*TWOPI)
+        + sin(3.*nMode*sNorm*TWOPI + hash_reals(sNorm, phase, 2.*nMode)*TWOPI)
+        + sin(4.*nMode*sNorm*TWOPI + hash_reals(sNorm, phase, 3.*nMode)*TWOPI)
+	+ sin(5.*nMode*sNorm*TWOPI + hash_reals(sNorm, phase, 4.*nMode)*TWOPI);
+      break;
+    case 6:
+      //res = exp(-pow((sNorm-s0)/sWidth,2.));
+      //no need to loop over anything, we are dealing with a 1D array
+      res = (rand()/(RAND_MAX + 1.0) * 1.0 ) ;
+      break;	
 
+    case 7:
+      res=cos(1.*sNorm*TWOPI  +  (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(2*sNorm*TWOPI    +  (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(3*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(4*sNorm*TWOPI       + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(5*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(6*sNorm*TWOPI    +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(7*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(8*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(9*sNorm*TWOPI    +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(10*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(11*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(12*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(13*sNorm*TWOPI +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(14*sNorm*TWOPI + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI);
+      break; 
+      //rfft(res,)
+      
+      break;
+      
     default: res=1.0;
     }
-
+  //output.write("s val: %f\n",res);
   return res;
 }
 
