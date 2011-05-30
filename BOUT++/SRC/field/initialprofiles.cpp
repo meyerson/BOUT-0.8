@@ -485,7 +485,41 @@ real Prof1D(real s, real s0, real sMin, real sMax, real sWidth, int nMode, real 
 	+cos(12*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
 	+cos(13*sNorm*TWOPI +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
 	+cos(14*sNorm*TWOPI + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI);
-      break; 
+      break;
+      
+    case 8:
+      res=cos(1.*sNorm*TWOPI)
+	+cos(2*sNorm*TWOPI)
+	+cos(3*sNorm*TWOPI)
+	+cos(4*sNorm*TWOPI)
+	+cos(5*sNorm*TWOPI)
+	+cos(6*sNorm*TWOPI)
+	+cos(7*sNorm*TWOPI)
+	+cos(8*sNorm*TWOPI)
+	+cos(9*sNorm*TWOPI)
+	+cos(10*sNorm*TWOPI)
+	+cos(11*sNorm*TWOPI)
+	+cos(12*sNorm*TWOPI)
+	+cos(13*sNorm*TWOPI)
+	+cos(14*sNorm*TWOPI);
+      break;
+    case 9:
+      res=cos(1.*sNorm*TWOPI +  1*(rand()/(1000.0 * RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(2*sNorm*TWOPI)
+	+cos(3*sNorm*TWOPI)
+	+cos(4*sNorm*TWOPI)
+	+cos(5*sNorm*TWOPI)
+	+cos(6*sNorm*TWOPI +  0*(rand()/(1000.0 * RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(7*sNorm*TWOPI)
+	+cos(8*sNorm*TWOPI)
+	+cos(9*sNorm*TWOPI)
+	+cos(10*sNorm*TWOPI)
+	+cos(11*sNorm*TWOPI)
+	+cos(12*sNorm*TWOPI)
+	+cos(13*sNorm*TWOPI)
+	+cos(14*sNorm*TWOPI);
+      break;
+
       //rfft(res,)
       
       break;
