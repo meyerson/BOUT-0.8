@@ -467,24 +467,25 @@ real Prof1D(real s, real s0, real sMin, real sMax, real sWidth, int nMode, real 
     case 6:
       //res = exp(-pow((sNorm-s0)/sWidth,2.));
       //no need to loop over anything, we are dealing with a 1D array
-      res = (rand()/(RAND_MAX + 1.0) * 1.0 ) ;
+      //res = (rand()/(RAND_MAX + 1.0) * 1.0 ) ;
+      res = hash_reals(sNorm, phase, 100);
       break;	
 
     case 7:
-      res=cos(1.*sNorm*TWOPI  +  (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(2*sNorm*TWOPI    +  (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(3*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(4*sNorm*TWOPI       + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(5*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(6*sNorm*TWOPI    +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(7*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(8*sNorm*TWOPI    + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(9*sNorm*TWOPI    +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(10*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(11*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(12*sNorm*TWOPI   + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(13*sNorm*TWOPI +(rand()/(RAND_MAX + 1.0) * 1.0 )*PI)
-	+cos(14*sNorm*TWOPI + (rand()/(RAND_MAX + 1.0) * 1.0 )*PI);
+      res=cos(1.*sNorm*TWOPI  + hash_reals(sNorm, phase, 1.)*PI)
+	+cos(2*sNorm*TWOPI    + hash_reals(sNorm, phase, 2.)*PI)
+	+cos(3*sNorm*TWOPI    + hash_reals(sNorm, phase, 3.)*PI)
+	+cos(4*sNorm*TWOPI    + hash_reals(sNorm, phase, 4.)*PI)
+	+cos(5*sNorm*TWOPI    + hash_reals(sNorm, phase, 5.)*PI)
+	+cos(6*sNorm*TWOPI    + hash_reals(sNorm, phase, 6.)*PI)
+	+cos(7*sNorm*TWOPI    + hash_reals(sNorm, phase, 7.)*PI)
+	+cos(8*sNorm*TWOPI    + hash_reals(sNorm, phase, 8.)*PI)
+	+cos(9*sNorm*TWOPI    + hash_reals(sNorm, phase, 9.)*PI)
+	+cos(10*sNorm*TWOPI   + hash_reals(sNorm, phase, 10.)*PI)
+	+cos(11*sNorm*TWOPI   + hash_reals(sNorm, phase, 11.)*PI)
+	+cos(12*sNorm*TWOPI   + hash_reals(sNorm, phase, 12.)*PI)
+	+cos(13*sNorm*TWOPI + hash_reals(sNorm, phase, 13.)*PI)
+	+cos(14*sNorm*TWOPI + hash_reals(sNorm, phase, 14.)*PI);
       break;
       
     case 8:
@@ -504,12 +505,12 @@ real Prof1D(real s, real s0, real sMin, real sMax, real sWidth, int nMode, real 
 	+cos(14*sNorm*TWOPI);
       break;
     case 9:
-      res=cos(1.*sNorm*TWOPI +  1*(rand()/(1000.0 * RAND_MAX + 1.0) * 1.0 )*PI)
+      res=cos(1.*sNorm*TWOPI +  1*(rand()/(100.0 * RAND_MAX + 1.0) * 1.0 )*PI)
 	+cos(2*sNorm*TWOPI)
 	+cos(3*sNorm*TWOPI)
 	+cos(4*sNorm*TWOPI)
 	+cos(5*sNorm*TWOPI)
-	+cos(6*sNorm*TWOPI +  0*(rand()/(1000.0 * RAND_MAX + 1.0) * 1.0 )*PI)
+	+cos(6*sNorm*TWOPI +  1*(rand()/(100.0 * RAND_MAX + 1.0) * 1.0 )*PI)
 	+cos(7*sNorm*TWOPI)
 	+cos(8*sNorm*TWOPI)
 	+cos(9*sNorm*TWOPI)
