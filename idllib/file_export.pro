@@ -1,7 +1,7 @@
 ; export a structure to a file
 ; return non-zero on error
 
-FUNCTION file_export, file, data, lowercase=lowercase, uppercase=uppercase
+FUNCTION file_export, file, data, lowercase=lowercase, uppercase=uppercase,custom_names = custom_names
   
   ON_ERROR, 2
   IF SIZE(file, /TYPE) EQ 7 THEN BEGIN ; a string, so filename
@@ -17,8 +17,14 @@ FUNCTION file_export, file, data, lowercase=lowercase, uppercase=uppercase
 
   names = TAG_NAMES(data)
 
+  if KEYWORD_SET(custom_names) then names = custom_names
+
   IF KEYWORD_SET(lowercase) THEN names = STRLOWCASE(names)
   IF KEYWORD_SET(uppercase) THEN names = STRUPCASE(names)
+
+
+  if KEYWORD_SET(custom_names) then names = custom_names
+
 
   FOR i=0, N_TAGS(data)-1 DO BEGIN
     var = data.(i)
